@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+	<changeSet author="${db.schema.name}" id="01 Create table USER_TABLE">
+		<createTable tableName="USER_TABLE" schemaName="${db.schema.name}">
+			<column name="COMPANY_ID" type="VARCHAR(255)">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="USER_ID" type="VARCHAR(255)">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="COMPANY_NAME" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+
+	<changeSet author="${db.schema.name}" id="02 Create table SAMPLE_TABLE">
+		<createTable tableName="SAMPLE_TABLE" schemaName="${db.schema.name}">
+			<column name="ID" type="INT">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="NAME" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="START_TIME" type="TIMESTAMP">
+				<constraints nullable="true" />
+			</column>
+		</createTable>
+	</changeSet>
+
+	<!-- <changeSet author="${db.schema.name}" id="02-1 addAutoIncrement-example"> 
+		<addAutoIncrement tableName="SAMPLE_TABLE" columnName="ID" schemaName="${db.schema.name}" 
+		columnDataType="int" incrementBy="1" startWith="100" /> </changeSet> -->
+
+	<changeSet author="${db.schema.name}" id="03 add Column DESC table SAMPLE_TABLE">
+		<addColumn tableName="SAMPLE_TABLE" schemaName="${db.schema.name}">
+			<column name="DESC" type="VARCHAR(255)">
+				<constraints nullable="true" />
+			</column>
+		</addColumn>
+	</changeSet>
+
+	<changeSet author="${db.schema.name}" id="04 Create table for mybatis">
+		<sql>
+			create table city (id int primary key auto_increment, name
+			varchar, state varchar, country varchar);
+			create table hotel (city
+			int, name varchar, address varchar, zip varchar);
+
+			insert into city
+			(name, state, country) values ('San Francisco', 'CA', 'US');
+			insert
+			into hotel(city, name, address, zip) values (1, 'Conrad Treasury
+			Place', 'William George Streets', '4001');
+		</sql>
+	</changeSet>
+	
+	<changeSet author="${db.schema.name}" id="05 Create default hibernate sequence">
+    <createSequence
+            cycle="true"
+            incrementBy="2"
+            ordered="true"
+            schemaName="${db.schema.name}"
+            sequenceName="HIBERNATE_SEQUENCE"
+            startValue="1"/>
+	</changeSet>
+
+	
+	<!-- add sequence,note that there is no maxValue minValue cycle etc cause h2 doesn't support -->
+	<changeSet author="${db.schema.name}" id="05 Create hibernate sequence">
+		<createSequence sequenceName="id_sequence" schemaName="${db.schema.name}"
+		 startValue="1" incrementBy="1" />
+		<!-- <sql>
+			create sequence HIBERNATE_SEQUENCE
+			minvalue 1
+			maxvalue 999999999999999
+			start with 81
+			increment by 1
+			cache 20;
+		</sql> -->
+	</changeSet>
+
+ 
+ 	
+
+</databaseChangeLog>
