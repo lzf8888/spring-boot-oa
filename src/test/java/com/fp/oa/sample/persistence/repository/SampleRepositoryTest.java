@@ -16,6 +16,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.fp.oa.config.DataSourceConfig;
 import com.fp.oa.sample.persistence.model.SampleEntity;
 import com.fp.oa.sample.persistence.repository.SampleRepository;
 import com.fp.oa.test.BaseTest;
@@ -23,13 +24,14 @@ import com.fp.oa.test.BaseTest;
 
 /*
  * when want to use system's database for test, activate those config
- * @ActiveProfiles("local")
-@AutoConfigureTestDatabase(replace = Replace.NONE)*/
+@AutoConfigureTestDatabase(replace = Replace.NONE) //do not use embededProxyDataSource
+@Import(DataSourceConfig.class) //choose the data source you really want,in test,it h2 config,
+Be NOTE THAT if DataSourceConfig has @Bean h2 webconlse it will cause port bind error,
+in that case better make @Bean h2 webconlse in another config file;
+*/
+// current annotations works with spring.jpa.properties.hibernate.default_schema in properties
 @RunWith(SpringRunner.class)
 @DataJpaTest
-@OverrideAutoConfiguration(enabled = true)
-//@Import(DataSourceConfig.class)
-//@AutoConfigureTestDatabase(replace = Replace.NONE)
 public class SampleRepositoryTest  extends BaseTest{
 	
 	@Autowired

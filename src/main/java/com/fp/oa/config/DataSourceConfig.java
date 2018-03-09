@@ -50,6 +50,9 @@ public class DataSourceConfig {
 	
 	@Bean
 	LocalContainerEntityManagerFactoryBean orderEntityManagerFactory(DataSource dataSource) {
+		// 1 schema name maybe case sensitive, 2 JPA must setSchema for further query,but before the changelog completion of liquibase
+		// or the changlog tables will be set to schema space to cause various problems
+		((DriverManagerDataSource)dataSource).setSchema(env.getProperty("db.schema.name", "TEST"));
 		HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
 		vendorAdapter.setShowSql(true);
 		vendorAdapter.setGenerateDdl(false);

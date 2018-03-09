@@ -5,18 +5,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.OverrideAutoConfiguration;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.fp.oa.sample.persistence.model.UserEntity;
 import com.fp.oa.sample.persistence.model.UserPK;
-import com.fp.oa.sample.persistence.repository.UserRepository;
 import com.fp.oa.test.BaseTest;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
-@OverrideAutoConfiguration(enabled = true)
 public class UserRepositoryTest extends BaseTest {
 	
 	@Autowired

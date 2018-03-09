@@ -7,8 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fp.oa.core.exception.ApiException;
+import com.fp.oa.core.result.ResultBean;
+import com.fp.oa.sample.TestService;
 import com.fp.oa.sample.persistence.dao.CityDao;
 import com.fp.oa.sample.persistence.model.SampleEntity;
 import com.fp.oa.sample.persistence.repository.SampleRepository;
@@ -21,6 +25,9 @@ public class TestController {
 	
 	@Autowired
 	CityDao dao;
+	
+	@Autowired
+	TestService testService;
 
 	//@PreAuthorize("hasAuthority('user')")
 	@RequestMapping(value = "/hello/{name}", method = RequestMethod.GET)
@@ -39,6 +46,15 @@ public class TestController {
         return "Hello " + dao.selectCityById(1);
     }
 	
-	
+	//ideal api style example
+	@RequestMapping(value = "/testfail", method = RequestMethod.GET)
+	public ResultBean<?> apiException(@RequestParam int id) {
+		try {
+			ResultBean<?> result = testService.getResultByIdButFail(id);
+			return result;
+		} catch (Exception e) {// 未知错误
+			throw new ApiException(e);
+		}
+	}
 	
 }

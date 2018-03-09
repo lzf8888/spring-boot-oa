@@ -5,6 +5,7 @@ import java.util.Locale;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.fp.oa.core.service.LocaleMessageService;
 
@@ -16,6 +17,7 @@ public class LocaleMessageServiceImpl implements LocaleMessageService {
 
 	@Override
 	public String getMessage(String key) {
+		checkNotNull(key);
 		String msg=messageSource.getMessage(key, null, Locale.SIMPLIFIED_CHINESE);
 		return msg;
 	}
