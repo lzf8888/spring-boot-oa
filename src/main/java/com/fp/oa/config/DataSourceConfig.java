@@ -33,6 +33,9 @@ public class DataSourceConfig {
 	@Value("${local.h2.password:}")
 	private String localH2Password;
 	
+	@Value("${server.port:8082}")
+	private String port;
+	
 	@Autowired
 	Environment env;
 
@@ -64,9 +67,9 @@ public class DataSourceConfig {
 	}
 
 	
-	@Bean(name = "h2WebServer", destroyMethod = "stop")
+	/*@Bean(name = "h2WebServer", destroyMethod = "stop")
 	public Server h2WebServer() throws SQLException {
 		LOG.info("--- create h2 database service ---");
-		return Server.createWebServer("-tcpPort", "8082", "-trace").start();
-	}
+		return Server.createWebServer("-tcpPort", port, "-trace").start();
+	}*/
 }

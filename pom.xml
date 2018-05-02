@@ -19,12 +19,25 @@
 	</parent>
 
 	<properties>
+		<hispace.version>0.0.1-SNAPSHOT</hispace.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
 	</properties>
+	
+	<repositories>
+		<repository>
+			<id>hispace</id>
+			<name>hispace repositories</name>
+			<url>http://www.digiworkplace.net:8081/nexus/content/repositories/</url>
+		</repository>
+	</repositories>
 
 	<dependencies>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-json-org</artifactId>
+        </dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
