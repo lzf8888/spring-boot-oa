@@ -1,6 +1,9 @@
 # spring-boot-oa
 It's a template to rapidly develop an enterprise backend application,such as OA 
 
+Project Overview:
+OaHttpRequestInterceptor to generate traceId
+
 How to config:
 add 
 -Ddb.schema.name=TEST 
