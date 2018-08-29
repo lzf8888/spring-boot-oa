@@ -3,6 +3,7 @@ It's a template to rapidly develop an enterprise backend application,such as OA
 
 Project Overview:
 OaHttpRequestInterceptor to generate traceId
+CustomFilter: to take application's own authentication, uses customized principal, filter is used in SecurityConfig.java for secure profile
 
 How to config:
 add 

@@ -16,6 +16,24 @@ public class ResultBean<T> implements Serializable {
 	public ResultBean() {
 		super();
 	}
+	
+	public ResultBean(int status, String msg, T object) {
+        this.code = status;
+        this.msg = msg;
+        this.data = object;
+    }
+
+	public static <K> ResultBean<K> success(K data) {
+		ResultBean<K> result = new ResultBean<K>(ResultBean.SUCCESS, "success", data);
+		return result;
+	}
+	
+	public static ResultBean<?> fail(String msg) {
+		ResultBean<?> result = new ResultBean();
+        result.setCode(ResultBean.FAIL);
+        result.setMsg(msg);
+        return result;
+    }
 
 	public ResultBean(T data) {
 		super();
