@@ -1,10 +1,13 @@
 package com.fp.oa.config;
 
-import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.client.BufferingClientHttpRequestFactory;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.client.RestTemplate;
+
+import com.fp.oa.core.interceptor.LoggingHttpRequestInterceptor;
 
 @Configuration
 public class AppConfig {
@@ -16,7 +19,9 @@ public class AppConfig {
 	}
 	
 	@Bean
-	public RestTemplate restTemplate(RestTemplateBuilder builder) {
-		return builder.build();
-	}
+    public RestTemplate restTemplate() {
+        RestTemplate restTemplate = new RestTemplate(new BufferingClientHttpRequestFactory(new SimpleClientHttpRequestFactory()));
+        restTemplate.getInterceptors().add(new LoggingHttpRequestInterceptor());//add interceptor to record request and response
+        return restTemplate;
+    }
 }
