@@ -3,12 +3,12 @@ package com.fp.oa.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.fp.oa.core.interceptor.OaHttpRequestInterceptor;
 
 @Configuration
-public class MvcConfiguration extends WebMvcConfigurerAdapter{
+public class MvcConfiguration implements WebMvcConfigurer{
 
 	@Bean
 	public OaHttpRequestInterceptor oaHttpRequestInterceptor() {
@@ -20,7 +20,6 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter{
     public void addInterceptors(InterceptorRegistry registry) {
 		//add interceptor to add traceId  
         registry.addInterceptor(oaHttpRequestInterceptor()).addPathPatterns("/**");
-        super.addInterceptors(registry);
     }
 	
 }
