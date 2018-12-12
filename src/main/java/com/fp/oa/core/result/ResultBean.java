@@ -9,6 +9,7 @@ public class ResultBean<T> implements Serializable {
 	public static final int SUCCESS = 0;
 	public static final int FAIL = 1;
 	public static final int NO_PERMISSION = 2;
+	public static final int ILLEGAL_PARAM =4;
 	private String msg = "success";
 	private int code = SUCCESS;
 	private T data;
