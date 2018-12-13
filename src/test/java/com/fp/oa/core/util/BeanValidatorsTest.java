@@ -16,6 +16,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.fp.oa.Main;
+import com.fp.oa.core.validate.BeanValidators;
 import com.fp.oa.sample.persistence.model.SampleEntity;
 import com.fp.oa.test.BaseTest;
 @RunWith(SpringRunner.class)

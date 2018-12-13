@@ -18,6 +18,9 @@ import org.springframework.http.client.ClientHttpRequestExecution;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.http.client.ClientHttpResponse;
 
+import com.fp.oa.core.exception.RpcException;
+import com.fp.oa.core.result.ResultBean;
+
 /**
  * This class is to log all request/resonse that using resttemplate
  */
@@ -63,7 +66,7 @@ public class LoggingHttpRequestInterceptor implements ClientHttpRequestIntercept
 		// controller adivice to catch such exception
 		// and return to the browser the right error body
 		if (!response.getStatusCode().is2xxSuccessful()) {
-			throw new RuntimeException("reponse is error");
+			throw new RpcException(ResultBean.RPC_ERROR, "http请求返回码为" + response.getStatusCode());
 		}
 
 	}

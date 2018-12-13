@@ -1,4 +1,4 @@
-package com.fp.oa.core.util;
+package com.fp.oa.core.validate;
 
 import java.util.Set;
 

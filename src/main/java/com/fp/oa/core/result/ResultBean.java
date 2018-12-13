@@ -9,7 +9,9 @@ public class ResultBean<T> implements Serializable {
 	public static final int SUCCESS = 0;
 	public static final int FAIL = 1;
 	public static final int NO_PERMISSION = 2;
-	public static final int ILLEGAL_PARAM =4;
+	public static final int ILLEGAL_PARAM = 4;
+	public static final int RPC_ERROR = 10000;
+	public static final int INTERNAL_ERROR = 500;
 	private String msg = "success";
 	private int code = SUCCESS;
 	private T data;
@@ -17,24 +19,31 @@ public class ResultBean<T> implements Serializable {
 	public ResultBean() {
 		super();
 	}
-	
+
 	public ResultBean(int status, String msg, T object) {
-        this.code = status;
-        this.msg = msg;
-        this.data = object;
-    }
+		this.code = status;
+		this.msg = msg;
+		this.data = object;
+	}
 
 	public static <K> ResultBean<K> success(K data) {
 		ResultBean<K> result = new ResultBean<K>(ResultBean.SUCCESS, "success", data);
 		return result;
 	}
-	
+
 	public static ResultBean<?> fail(String msg) {
 		ResultBean<?> result = new ResultBean();
-        result.setCode(ResultBean.FAIL);
-        result.setMsg(msg);
-        return result;
-    }
+		result.setCode(ResultBean.FAIL);
+		result.setMsg(msg);
+		return result;
+	}
+
+	public static ResultBean<?> internalError(String msg) {
+		ResultBean<?> result = new ResultBean();
+		result.setCode(ResultBean.INTERNAL_ERROR);
+		result.setMsg(msg);
+		return result;
+	}
 
 	public ResultBean(T data) {
 		super();
@@ -86,7 +95,5 @@ public class ResultBean<T> implements Serializable {
 	public static int getNoPermission() {
 		return NO_PERMISSION;
 	}
-	
-	
 
 }
