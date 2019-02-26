@@ -15,8 +15,10 @@ import static org.mockito.BDDMockito.given;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.fp.oa.sample.persistence.dao.CityDao;
@@ -32,7 +34,11 @@ import com.fp.oa.test.BaseTest;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@TestPropertySource(locations = "/test.properties")
 public class MocKExapleTest extends BaseTest {
+
+	@Value("${app.test.value1}")
+	private String value1;
 
 	@MockBean
 	CityDao cityDao;// bean that service use for dependency
@@ -57,6 +63,11 @@ public class MocKExapleTest extends BaseTest {
 		given(cityDao.selectCityById(anyLong())).willReturn(city2);
 		assertThat(service.methodForTest(9L)).isEqualTo("hehe");
 
+	}
+
+	@Test
+	public void test2() {
+		assertThat(value1).isEqualTo("value1111");
 	}
 
 }
